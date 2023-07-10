@@ -34,7 +34,7 @@ while True:
     if pics_yn == "y" or pics_yn == "Y":
         pics = True
         break
-    if pics_yn != "n" or pics_yn != "N":
+    if pics_yn != "n" and pics_yn != "N":
         print("Not a valid answer")
     else:
         break

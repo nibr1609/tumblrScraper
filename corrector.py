@@ -7,7 +7,7 @@ while True:
     if override_yn == "y" or override_yn == "Y":
         override = True
         break
-    if override_yn != "n" or override_yn != "N":
+    if override_yn != "n" and override_yn != "N":
         print("Not a valid answer")
     else:
         break
