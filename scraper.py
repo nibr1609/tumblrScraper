@@ -28,6 +28,17 @@ if not os.path.isdir("./data/"):
 if not os.path.isdir("./images/"):
     os.makedirs("./images/")
 
+pics = False
+while True:
+    pics_yn = input("do you want to override existing files? [yn] \n")
+    if pics_yn == "y" or pics_yn == "Y":
+        pics = True
+        break
+    if pics_yn != "n" or pics_yn != "N":
+        print("Not a valid answer")
+    else:
+        break
+
 key_file = open('./key/key.txt', 'r')
 key = key_file.readlines()[0]
 blogname = input('Enter your blog identifier <blogname>.tumblr.com (e.g. staff.tumblr.com): \n')
@@ -54,19 +65,20 @@ for i in range(0, chunks):
         f.write(text.get_text(separator="\n"))
         f.close()
 
-        img_path = "./images/entry_" + str(post_no) + "/"
-        # if path not exist => create
-        if not os.path.isdir(img_path):
-            os.makedirs(img_path)
-        # scrape image
-        for img in tqdm(text.find_all("img"), "Extracting images"):
-            img_url = img.attrs.get("src")
-            if not img_url:
-                # if img does not contain src attribute, just skip
-                continue
-            ### oben auf 50 ändern von 1
-                
-            download(img_url, img_path)
+        if pics:
+            img_path = "./images/entry_" + str(post_no) + "/"
+            # if path not exist => create
+            if not os.path.isdir(img_path):
+                os.makedirs(img_path)
+            # scrape image
+            for img in tqdm(text.find_all("img"), "Extracting images"):
+                img_url = img.attrs.get("src")
+                if not img_url:
+                    # if img does not contain src attribute, just skip
+                    continue
+                ### oben auf 50 ändern von 1
+                    
+                download(img_url, img_path)
         post_no += 1
     posts_data = client.posts(blogname, limit=50, offset=50*(i+1))
 
