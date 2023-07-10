@@ -22,6 +22,12 @@ def download(url, pathname):
             # update the progress bar manually
             progress.update(len(data))
 
+if not os.path.isdir("./data/"):
+    os.makedirs("./data/")
+
+if not os.path.isdir("./images/"):
+    os.makedirs("./images/")
+
 key_file = open('./key/key.txt', 'r')
 key = key_file.readlines()[0]
 blogname = input('Enter your blog identifier <blogname>.tumblr.com (e.g. staff.tumblr.com): \n')
