@@ -30,7 +30,7 @@ if not os.path.isdir("./images/"):
 
 pics = False
 while True:
-    pics_yn = input("do you want to override existing files? [yn] \n")
+    pics_yn = input("Do you want to download the images? [yn] \n")
     if pics_yn == "y" or pics_yn == "Y":
         pics = True
         break
